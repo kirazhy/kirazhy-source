@@ -1,0 +1,324 @@
+@import './const.scss';
+//清除浮动
+@mixin clearfix {
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
+//页面初始化
+@mixin page_init($background, $padding_top:30px, $padding_left:30px) {
+	min-height: 100vh;
+	padding: $padding_top $padding_left;
+	box-sizing: border-box;
+	color: white;
+	background-image: url($background);
+	background-size: 100% 100%;
+	background-position: 0 center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+//浏览器兼容filter
+@mixin browser_filter($filter) {
+	-webkit-filter: $filter;
+	-moz-filter: $filter;
+	-ms-filter: $filter;
+	-o-filter: $filter;
+	filter: $filter;
+}
+
+//向下margin
+@mixin margin_bottom($margin_bottom) {
+	&:not(:last-child) {
+		margin-bottom: $margin_bottom;
+	}
+}
+
+//向右margin
+@mixin margin_right($margin_right) {
+	&:not(:last-child) {
+		margin-right: $margin_right;
+	}
+}
+
+//不许点击
+@mixin unselect {
+	-webkit-user-select: none;
+}
+
+//八叉的按钮使用
+@mixin close_cross($length, $normal_color, $hover_color, $position:relative, $is_full:false) {
+	position: $position;
+	width: $length;
+	height: $length;
+	border: none;
+	background-color: transparent;
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		@if $is_full==true {
+			width: $length * 1.4142135623730950488016887242097;
+		}
+		@else {
+			width: $length / 2;
+		}
+		height: 1px;
+		background-color: $normal_color;
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 1px;
+		@if $is_full==true {
+			height: $length * 1.4142135623730950488016887242097;
+		}
+		@else {
+			height: $length / 2;
+		}
+		background-color: $normal_color;
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+	&:hover {
+		&:before,
+		&:after {
+			background-color: $hover_color;
+		}
+	}
+}
+
+//箭头
+@mixin arrow($length, $direction:right, $color:white, $thickness:1px) {
+	&:before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: $length / 1.4142135623730950488016887242097;
+		height: $length / 1.4142135623730950488016887242097;
+		border-top: $thickness solid $color;
+		border-right: $thickness solid $color;
+		@if $direction==up {
+			transform: translate(-50%, -50%) rotate(-45deg);
+		}
+		@else if $direction==right {
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+		@else if $direction==down {
+			transform: translate(-50%, -50%) rotate(135deg);
+		}
+		@else if $direction==left {
+			transform: translate(-50%, -50%) rotate(-135deg);
+		}
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		@if $direction==up {
+			width: $thickness;
+			height: $length;
+		}
+		@else if $direction==right {
+			width: $length;
+			height: $thickness;
+		}
+		@else if $direction==down {
+			width: $thickness;
+			height: $length;
+		}
+		@else if $direction==left {
+			width: $length;
+			height: $thickness;
+		}
+		background-color: $color;
+		transform: translate(-50%, -50%);
+	}
+}
+
+//三角形
+@mixin triangle($width, $height, $direction, $normal_color, $hover_color:$normal_color) {
+	$color_border: $height solid $normal_color;
+	$transparent_border: $width/2 solid transparent;
+	width: 0;
+	height: 0;
+	vertical-align: middle;
+	border: none;
+	background-color: transparent;
+	@if $direction==up {
+		border: {
+			bottom: $color_border;
+			left: $transparent_border;
+			right: $transparent_border;
+		}
+		&:hover {
+			border-bottom-color: $hover_color;
+		}
+	}
+	@else if $direction==right {
+		border: {
+			left: $color_border;
+			top: $transparent_border;
+			bottom: $transparent_border;
+		}
+		&:hover {
+			border-left-color: $hover_color;
+		}
+	}
+	@else if $direction==down {
+		border: {
+			top: $color_border;
+			left: $transparent_border;
+			right: $transparent_border;
+		}
+		&:hover {
+			border-top-color: $hover_color;
+		}
+	}
+	@else if $direction==left {
+		border: {
+			right: $color_border;
+			top: $transparent_border;
+			bottom: $transparent_border;
+		}
+		&:hover {
+			border-right-color: $hover_color;
+		}
+	}
+}
+
+//输入框的初始化
+@mixin input_placeholder($font_size, $color, $background_color) {
+	/*firefox 19+*/
+	input::-moz-placeholder {
+		font-size: $font_size;
+		color: $color;
+	}
+	/*firefox 4-18*/
+	input:-moz-placeholder {
+		font-size: $font_size;
+		color: $color;
+	}
+	/* WebKit browsers */
+	input::-webkit-input-placeholder {
+		font-size: $font_size;
+		color: $color;
+	}
+	/*IE 10+*/
+	input:-ms-input-placeholder {
+		font-size: $font_size;
+		color: $color;
+	}
+	/* chrome浏览器自动填表时的黄色背景*/
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0px 1000px $background_color inset;
+	}
+}
+
+//比较通用的卡片阴影
+@mixin card_shadow($trigger:always) {
+	@if $trigger==always {
+		box-shadow: 0px 3px 10px 0px rgba(54, 27, 17, 0.23);
+	}
+	@else if $trigger==hover {
+		&:hover {
+			box-shadow: 0px 3px 10px 0px rgba(54, 27, 17, 0.23);
+		}
+	}
+}
+
+//使用absolute的居中
+@mixin absolute_center($type:full) {
+	position: absolute;
+	@if $type==full {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	@else if $type==vertical {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	@else if $type==horizontal {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+//加号
+@mixin plus_cross($length, $thickness, $color) {
+	&:before {
+		content: '';
+		@include absolute_center;
+		display: block;
+		width: $length;
+		height: $thickness;
+		background-color: $color;
+	}
+	&:after {
+		content: '';
+		@include absolute_center;
+		display: block;
+		width: $thickness;
+		height: $length;
+		background-color: $color;
+	}
+}
+
+//直角三角形，放到容器某一个角上
+@mixin right_triangle($width, $position, $color) {
+	position: absolute;
+	#{nth($position,1)}: 0;
+	#{nth($position,2)}: 0;
+	width: 0;
+	height: 0;
+	border: $width / 2 solid transparent;
+	border-#{nth($position,1)}-color: $color;
+	border-#{nth($position,2)}-color: $color;
+}
+
+//对勾
+@mixin correct_mark($width, $height, $color, $position) {
+	position: absolute;
+	#{nth($position,1)}: nth($position, 2);
+	#{nth($position,3)}: nth($position, 4);
+	transform: rotate(45deg);
+	width: $width;
+	height: $height;
+	border-right: 1px solid $color;
+	border-bottom: 1px solid $color;
+}
+
+//直角三角形加对勾
+@mixin right_triangle_and_corrent_mark($triangle_width, $triangle_color, $mark_width, $mark_height, $mark_color, $position) {
+	&:before {
+		content: '';
+		@include right_triangle($triangle_width, nth($position, 1) nth($position, 3), $triangle_color);
+	}
+	&:after {
+		content: '';
+		@include correct_mark($mark_width, $mark_height, $mark_color, $position);
+	}
+}
+
+//黑色的背景
+@mixin background_wrapper() {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	overflow: auto;
+}

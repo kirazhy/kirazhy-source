@@ -1,0 +1,4 @@
+@import './const.scss';
+@function PxToRem($px, $html_font_size: $global_html_font_percent) {
+	@return $px / ($html_font_size / 6.25%) / 1px * 1rem;
+}
