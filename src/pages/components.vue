@@ -1,5 +1,5 @@
 <template>
-<div class="Components">components
+<div class="components-page">components
 <!--
     <div v-for="introduce in introduces" class="background" :style="introduce.background">
       <div class="content">
@@ -32,7 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.Components {
+	.components-page {
 		@include page_init('/static/images/resume.jpeg');
 	}
 

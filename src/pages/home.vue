@@ -1,5 +1,5 @@
 <template>
-<div class="Home">
+<div class="home-page">
 	<FrostedGlass v-for="(introduce,index) in introduces" img="/static/images/home.jpeg" :key="index">
  		<h1>{{introduce.title}}</h1>
   	<p>{{introduce.content}}</p>
@@ -35,7 +35,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.Home {
+	.home-page {
 		@include page_init('/static/images/home.jpeg');
 		.FrostedGlass {
 			font-family: 'SnellRoundhand';
