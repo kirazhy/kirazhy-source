@@ -7,7 +7,7 @@ const app = {
 		isNavExpand: false,
 	},
 	mutations: {
-		[store.mutation.TOGGLE_NAV]: (state, isNavExpand) => {
+		[store.mutation.SET_IS_NAV_EXPAND]: (state, isNavExpand) => {
 			state.isNavExpand = isNavExpand;
 		}
 	},
@@ -16,7 +16,7 @@ const app = {
 			commit
 		}, isNavExpand) => {
 			return new Promise((resolve, reject) => {
-				commit(store.mutation.TOGGLE_NAV, isNavExpand);
+				commit(store.mutation.SET_IS_NAV_EXPAND, isNavExpand);
 				resolve(isNavExpand);
 			}).catch(err => {
 				console.log(store.action.TOGGLE_NAV, err);

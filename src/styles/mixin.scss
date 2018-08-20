@@ -198,7 +198,7 @@
 }
 
 //输入框的初始化
-@mixin input_placeholder($font_size, $color, $background_color) {
+@mixin input_placeholder($font_size, $color, $background_color:white) {
 	/*firefox 19+*/
 	input::-moz-placeholder {
 		font-size: $font_size;
@@ -227,12 +227,13 @@
 
 //比较通用的卡片阴影
 @mixin card_shadow($trigger:always) {
+	$shadow: 0px 3px 10px 0px rgba(54, 27, 17, 0.23);
 	@if $trigger==always {
-		box-shadow: 0px 3px 10px 0px rgba(54, 27, 17, 0.23);
+		box-shadow: $shadow;
 	}
 	@else if $trigger==hover {
 		&:hover {
-			box-shadow: 0px 3px 10px 0px rgba(54, 27, 17, 0.23);
+			box-shadow: $shadow;
 		}
 	}
 }

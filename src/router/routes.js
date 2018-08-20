@@ -6,6 +6,10 @@ const RESUME = () =>
 	import ('pages/resume');
 const COMPONENTS = () =>
 	import ('pages/components');
+const PHOTOGRAPHY = () =>
+	import ('pages/photography');
+const BLOG = () =>
+	import ('pages/blog');
 
 const ConstantRouter = [{
 	path: '/',
@@ -29,6 +33,20 @@ const ConstantRouter = [{
 		path: 'components',
 		name: 'Components',
 		component: COMPONENTS,
+		meta: {
+			icon: 'address-card'
+		}
+	}, {
+		path: 'blog',
+		name: 'Blog',
+		component: BLOG,
+		meta: {
+			icon: 'address-card'
+		}
+	}, {
+		path: 'photography',
+		name: 'Photography',
+		component: PHOTOGRAPHY,
 		meta: {
 			icon: 'address-card'
 		}

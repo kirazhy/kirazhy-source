@@ -22,7 +22,8 @@
 		},
 		methods: {
 			onClick() {
-				this.isNavExpand ? this.$store.dispatch(this.$const.store.action.TOGGLE_NAV, false).then(res => {}).catch(err => {}) : null;
+				//				this.isNavExpand ? this.$store.dispatch(this.$const.store.action.TOGGLE_NAV, false).then(res => {}).catch(err => {}) : null;
+				this.isNavExpand && this.$store.dispatch(this.$const.store.action.TOGGLE_NAV, false).then(res => {}).catch(err => {});
 			}
 		}
 	};
